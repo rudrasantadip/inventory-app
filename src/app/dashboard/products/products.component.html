@@ -1,0 +1,234 @@
+<div class="row">
+  <div class="col-sm-auto mb-3 mb-sm-0">
+    <div class="card">
+      <div class="card-body text-center">
+        <button class="btn btn-info m-2" (click)="addProduct()">
+          <span class="material-icons-outlined">add</span>
+        </button>
+        <button class="btn btn-danger m-2" (click)="removeProduct()">
+          <span class="material-icons-outlined">delete</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-3">
+    <div class="col-sm-6 mb-3 mb-sm-0">
+      <div class="card">
+        <div class="card-body text-center">
+          <h5 class="card-title text-center">Bottom Products</h5>
+          <angular-d3-cloud
+            [data]="data"
+            [width]="300"
+            [height]="300"
+            font="serif"
+            [rotate]="0"
+            [autoFill]="true"
+            (wordClick)="onWorkClick($event)"
+          ></angular-d3-cloud>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6 mb-3 mb-sm-0">
+      <div class="card">
+        <div class="card-body text-center">
+          <h5 class="card-title text-center">Top Products</h5>
+          <angular-d3-cloud
+            [data]="data"
+            [width]="300"
+            [height]="300"
+            font="serif"
+            [rotate]="0"
+            [autoFill]="true"
+            (wordClick)="onWorkClick($event)"
+          ></angular-d3-cloud>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-3">
+    <div class="col-sm-6 mb-3 mb-sm-0">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title text-center">Categories</h5>
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">First</th>
+                <th scope="col">Last</th>
+                <th scope="col">Handle</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+              </tr>
+              <tr>
+                <th scope="row">2</th>
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>@fat</td>
+              </tr>
+              <tr>
+                <th scope="row">3</th>
+                <td colspan="2">Larry the Bird</td>
+                <td>@twitter</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title text-center">Products</h5>
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">First</th>
+                <th scope="col">Last</th>
+                <th scope="col">Handle</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+              </tr>
+              <tr>
+                <th scope="row">2</th>
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>@fat</td>
+              </tr>
+              <tr>
+                <th scope="row">3</th>
+                <td colspan="2">Larry the Bird</td>
+                <td>@twitter</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card add-product" *ngIf="showpopUp">
+  <div class="card-header d-flex flex-row justify-content-between">
+    Add Product
+    <span (click)="closePopup()" class="material-icons-outlined mt-3"> close </span>
+  </div>
+  <div class="card-body">
+    <form [formGroup]="productForm" (ngSubmit)="onSubmit()">    
+    <div class="row g-3">
+      <div class="col-md">
+        <div class="form-floating">
+         <select class="form-select" formControlName="productName"  id="floatingSelectGrid2">
+          <option
+          *ngFor="let name of productNames"
+          [value]="name"
+          >{{name}}
+        </option>
+         </select>
+          <label for="floatingInputGrid2">Product Name</label>
+          <div *ngIf="productForm.get('productName')?.invalid && productForm.get('productName')?.touched" class="text-danger">
+            Product Name is required
+          </div>
+        </div>
+
+      </div>
+      <div class="col-md">
+        <div class="form-floating">
+          <input
+            type="text"
+            class="form-control"
+            id="floatingInputGrid"
+            placeholder="Fruit"
+            formControlName="categoryPrimary"
+          />
+          <label for="floatingInputGrid">Primary Category</label>
+          <div *ngIf="productForm.get('categoryPrimary')?.invalid && productForm.get('categoryPrimary')?.touched" class="text-danger">
+            Primary Category is required
+          </div>
+        </div>
+      </div>
+      <div class="col-md">
+        <div class="form-floating">
+          <input
+            type="text"
+            class="form-control"
+            id="floatingInputGrid"
+            placeholder="Fruit"
+            formControlName="categorySecondary"
+          />
+          <label for="floatingInputGrid">Secondary Category</label>
+          <div *ngIf="productForm.get('categorySecondary')?.invalid && productForm.get('categorySecondary')?.touched" class="text-danger">
+            Secondary Category is required
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row g-3 mt-2">
+      <div class="col-md">
+        <div class="form-floating">
+          <input
+            type="text"
+            class="form-control"
+            id="floatingInputGrid"
+            placeholder="name@example.com"
+            formControlName="price"
+          />
+          <label for="floatingInputGrid">Price</label>
+          <div *ngIf="productForm.get('price')?.invalid && productForm.get('price')?.touched" class="text-danger">
+            Valid price is required
+          </div>
+        </div>
+      </div>
+      <div class="col-md">
+        <div class="input-group">
+          <div class="form-floating">
+            <input type="text" class="form-control" id="floatingInputGroup2" placeholder="quantity" formControlName="quantity" required>
+            <label for="floatingInputGroup2">Quantity</label>
+            <div *ngIf="productForm.get('quantity')?.invalid && productForm.get('quantity')?.touched" class="text-danger">
+              Valid quantity is required
+            </div>
+          </div>
+          <span class="input-group-text">Kg</span>
+        </div>
+        
+      </div>
+
+      <div class="col-md">
+        <div class="form-floating">
+          <input
+            type="text"
+            class="form-control"
+            id="floatingInputGrid"
+            placeholder="product type"
+            formControlName="productType"
+          />
+          <label for="floatingInputGrid">Product Type</label>
+          <div *ngIf="productForm.get('productType')?.invalid && productForm.get('productType')?.touched" class="text-danger">
+            Product Type is required
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="submit mt-2 text-center">
+      <button class="btn btn-light" type="submit" [disabled]="productForm.invalid">Add</button>
+    </div>
+  </form>
+  </div>
+</div>

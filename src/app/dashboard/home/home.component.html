@@ -1,0 +1,187 @@
+<div class="container text-center">
+  <div class="sales-activity container bg-body-tertiary rounded p-3 shadow-sm">
+    <div class="heading">
+      <h3 style="color: black;">Sales Activity</h3>
+    </div>
+    <div>
+    
+      <div class="row">
+        <div class="col-sm-3 mb-3 mb-sm-0">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Ordered</h5>
+              <p class="card-text" style="color: blue;">
+               {{salesDto.ordered ? salesDto.ordered:0}}
+              </p>
+              <a href="#" class="btn btn-primary"
+                > <span class="material-icons-outlined">send</span></a
+              >
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Shipped</h5>
+              <p class="card-text" style="color: red;">
+                {{salesDto.shipped ? salesDto.shipped:0}}
+              </p>
+              <a href="#" class="btn btn-primary"
+                ><span class="material-icons-outlined">send</span></a
+              >
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-3 mb-3 mb-sm-0">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Delivered</h5>
+              <p class="card-text" style="color: green;">
+               {{salesDto.delivered ? salesDto.delivered:0}}
+              </p>
+              <a href="#" class="btn btn-primary"
+                ><span class="material-icons-outlined">send</span></a
+              >
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-3">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Invoiced</h5>
+              <p class="card-text" style="color: blue;">
+                {{salesDto.cancelled?salesDto.cancelled:0}}
+              </p>
+              <a href="#" class="btn btn-primary"
+                ><span class="material-icons-outlined">send</span></a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+  <div class="row product-details container mt-3 d-flex justify-content-md-center">
+    <div class="col-4 card m-2" style="height: 200px;">
+      <h5 class="card-header">Product Details</h5>
+      <a [routerLink]="['/dashboard/view']" class="btn btn-light">
+        <span class="material-icons-outlined">send</span>
+      </a>
+      <div class="card-body">
+        <ul>
+          <li class="fw-semibold font-monospace" style="color:red;">Low Stock Items: {{productDetailsDto?.lowStocks}}</li>
+          <li class="fw-semibold font-monospace" style="color: blue;">All Categories: {{productDetailsDto?.allCategories}}</li>
+          <li class="fw-semibold font-monospace" style="color: blue;">All Items: {{productDetailsDto?.AllProducts}}</li>
+          <li class="fw-semibold font-monospace" style="color: blue;">Unconfirmed Items: 69</li>
+        </ul>
+      
+      </div>
+    </div>
+  
+    <div class="col-7 card m-2">
+      <h5 class="card-header">Top Selling Items</h5>
+      <div class="card-body row">
+        <div class="card col-4 p-3" *ngFor="let order of orderCountDtos">
+          <img src="https://catchmydrift.in/cdn/shop/products/for-kings-only-black-t-shirt-clothing-printrove-black-s-268869.jpg?v=1693949224" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">{{order.productName}}</h5>
+            <p class="card-text top-products">{{order.orderCount}} Kg</p>
+          </div>
+        </div> 
+      </div>
+    </div>
+  </div>
+  
+  <div class="row charts container text-center">
+    <div class=" col-6 card text-bg-light  mb-3 shadow-sm rounded">
+      <div class="card-header">Product Sales</div>
+      <ag-charts
+      style="height: 100%"
+      [options]="productSalesOptions">
+     </ag-charts>
+    </div>
+  
+    <div class="col-6 card  text-bg-light  mb-3 shadow-sm rounded">
+      <div class="card-header">Product Stocks</div>
+      <ag-charts
+      style="height: 100%;"
+      [options]="productStocksOptions">
+     </ag-charts>
+    </div>
+  
+    <div class="col-6 card text-bg-light  mb-3 shadow-sm rounded">
+      <div class="card-header">Order Details</div>
+      <ag-charts
+      style="height: 100%;"
+      [options]="orderOptions">
+     </ag-charts>
+    </div>
+  </div>
+
+<div class="row">
+  <div class="card col">
+    <div class="card-header">
+      Purchase Order
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">
+        Quantity Ordered
+        <select>
+          <option value="">This Month</option>
+          <option value="">Last Six Months</option>
+          <option value="">Last Year</option>
+          <option>Current Year</option>
+        </select>
+      </h5>
+      <p class="card-text">652</p>
+      <a href="#" class="btn btn-primary">Purchase Report</a>
+    </div>
+  </div>
+
+  <div class="card col ms-1">
+    <div class="card-header">
+     Sales Order
+    </div>
+    <div class="card-body">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Channel</th>
+            <th scope="col">Draft</th>
+            <th scope="col">Confirmed</th>
+            <th scope="col">Packed</th>
+            <th scope="col">Shipped</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+            <td>Mark</td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+            <td>Mark</td>    
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+            <td>Mark</td>    
+          </tr>
+        </tbody>
+      </table>
+
+      <button class="btn btn-primary">Sales Report</button>
+    </div>
+  </div>
+</div>
+</div>

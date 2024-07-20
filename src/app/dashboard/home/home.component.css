@@ -1,0 +1,18 @@
+.material-icons-outlined
+{
+    font-size: 14px;
+}
+
+.card > img{
+    width: 100px;
+    margin: auto;
+}
+
+.card-text{
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.top-products{
+    font-size: 14px;
+}

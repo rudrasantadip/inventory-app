@@ -1,0 +1,14 @@
+<div class="sidebar-title">
+    <div class="sidebar-brand" style="color: white;">
+      <span class="material-icons-outlined" style="color: white;" (click)="closeSideBar()">close</span>
+    </div>
+    <span style="color: white;" class="material-icons-outlined">close</span>
+</div>
+
+  <ul class="sidebar-list">
+    <li class="sidebar-list-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" *ngFor="let item of navItems">
+      <a [routerLink]="item.routerLink">
+        <span class="material-icons-outlined">{{item.icon}}</span> {{item.name}}
+      </a>
+    </li>
+  </ul>
